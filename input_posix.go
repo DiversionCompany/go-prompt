@@ -1,3 +1,4 @@
+//go:build !windows
 // +build !windows
 
 package prompt
@@ -33,9 +34,6 @@ func (t *PosixParser) Setup() error {
 // TearDown should be called after stopping input
 func (t *PosixParser) TearDown() error {
 	if err := syscall.SetNonblock(t.fd, false); err != nil {
-		return err
-	}
-	if err := syscall.Close(t.fd); err != nil {
 		return err
 	}
 	if err := term.Restore(); err != nil {
