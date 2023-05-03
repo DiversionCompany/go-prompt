@@ -9,7 +9,10 @@ type History struct {
 
 // Add to add text in history.
 func (h *History) Add(input string) {
-	h.histories = append(h.histories, input)
+	if len(h.histories) == 0 || h.histories[len(h.histories)-1] != input {
+		// ignore if same as last input
+		h.histories = append(h.histories, input)
+	}
 	h.Clear()
 }
 
